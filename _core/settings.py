@@ -33,7 +33,7 @@ DEBUG = os.getenv("DEBUG", False)
 
 ALLOWED_HOSTS = []
 
-ALLOWED_HOSTS = ["web-production-7fde.up.railway.app", "0.0.0.0"]
+ALLOWED_HOSTS = ['web-production-72eb.up.railway.app/', "0.0.0.0"]
 
 # Application definition
 
@@ -112,8 +112,7 @@ DATABASES = {
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
-    db_from_env = dj_database_url.config(
-        default=DATABASE_URL, conn_max_age=500, ssl_require=True)
+    db_from_env = dj_database_url.config(default=DATABASE_URL)
     DATABASES['default'].update(db_from_env)
     DEBUG = False
 
