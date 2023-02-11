@@ -33,9 +33,7 @@ DEBUG = os.getenv("DEBUG", False)
 
 ALLOWED_HOSTS = []
 
-RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+ALLOWED_HOSTS = ["web-production-7fde.up.railway.app", "0.0.0.0"]
 
 # Application definition
 
