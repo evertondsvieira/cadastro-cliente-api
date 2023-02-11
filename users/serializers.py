@@ -1,9 +1,11 @@
 from rest_framework import serializers
 from .models import User
+from contacts.serializers import ContactSerializer
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.hashers import make_password
 
 class UserSerializer(serializers.ModelSerializer):
+    contacts = ContactSerializer(many=True, required=False)
     class Meta:
         model = User
         fields = [
@@ -13,6 +15,8 @@ class UserSerializer(serializers.ModelSerializer):
             'email',
             'password', 
             'phone',
+            'created_at',
+            'contacts',
         ]
         extra_kwargs = {'password': {'write_only': True}}
 
@@ -31,15 +35,19 @@ class UserSerializer(serializers.ModelSerializer):
     )
 
     def create(self, validated_data: dict) -> User:
-        return User.objects.create_user(**validated_data)
+        password = validated_data.pop('password', None)
+        if password:
+            validated_data['password'] = make_password(password)
+        user = User.objects.create(**validated_data)
+        return user
     
+    
+    def update(self, instance: User, validated_data: dict) -> User:
+        for key, value in validated_data.items():
+            if key == "password":
+                value = make_password(value)
+            setattr(instance, key, value)
 
-def update(self, instance: User, validated_data: dict) -> User:
-    for key, value in validated_data.items():
-        if key == "password":
-            value = make_password(value)
-        setattr(instance, key, value)
+        instance.save()
 
-    instance.save()
-
-    return instance
+        return instance
