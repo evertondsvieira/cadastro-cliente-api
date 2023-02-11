@@ -33,7 +33,7 @@ DEBUG = os.getenv("DEBUG", False)
 
 ALLOWED_HOSTS = []
 
-ALLOWED_HOSTS = ['web-production-72eb.up.railway.app/', "0.0.0.0"]
+ALLOWED_HOSTS = ['cadastro-cliente-api-production.up.railway.app', "0.0.0.0"]
 
 # Application definition
 
