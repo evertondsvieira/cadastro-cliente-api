@@ -31,6 +31,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", False)
 
 ALLOWED_HOSTS = ['cadastro-cliente-api-production.up.railway.app', "0.0.0.0"]
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
